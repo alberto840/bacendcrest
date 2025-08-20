@@ -5,7 +5,7 @@ spring:
   application:
     name: mi-backend
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/nuevaveterinaria}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/bddalta}
     username: ${DATABASE_USERNAME:postgres}
     password: ${DATABASE_PASSWORD:root}
     driver-class-name: org.postgresql.Driver

@@ -1,0 +1,71 @@
+server:
+  port: ${PORT:8086}
+
+spring:
+  application:
+    name: mi-backend
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/nuevaveterinaria}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:root}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5       # 🔧 No uses los 15 completos para dejar margen a pgAdmin, CLI u otras herramientas
+      minimum-idle: 1
+      idle-timeout: 30000         # 30 segundos inactivo se cierra la conexión
+      max-lifetime: 1800000       # 30 minutos de vida máxima por conexión
+      connection-timeout: 30000   # 30 segundos máximo esperando una conexión libre
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:jose74080986@gmail.com}
+    password: ${MAIL_PASSWORD:ckpl nico lblw mvzw}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl.trust: smtp.gmail.com
+  servlet:
+    multipart:
+      max-file-size: 1GB
+      max-request-size: 1GB
+
+
+minio:
+  url: ${MINIO_URL:http://localhost:9000}
+  access-key: ${MINIO_ACCESS_KEY:admin}
+  secret-key: ${MINIO_SECRET_KEY:password}
+  bucket-name: ${MINIO_BUCKET_NAME:aaasdfv}
+
+jwt:
+  secret: ${JWT_SECRET:5b02bb72ff0fb7d8b31e78b8097f557b50cf4f0899e49709d82063f3bbdcf23c35f8c7b88b093f3f16e1dbfb30116e47bd5d5e3f21ae77a5f56ee0fe8e8cf7a9}
+  expiration: ${JWT_EXPIRATION:172800000}
+  header: ${JWT_HEADER:Authorization}
+  prefix: ${JWT_PREFIX:Bearer}
+
+logging:
+  level:
+    org.springframework.mail: DEBUG
+    jakarta.mail: DEBUG
+    
+gemini:
+  api:
+    key: ${GEMINI_API_KEY:AIzaSyCOi1UqNndXTs6xIG72TC9o_jb9rqTMj-o}
+    model: "gemini-1.5-flash-latest"
+
+whatsapp:
+  api:
+    token: "EAAUQIPknyMwBOx4urgr7pZCdd84ZCuLSgBvDeEZAb1du6ZA1F9q7HzHZBEwEWdBAtZCZBF5OMg2YmLU0QzvEuWEZC6q7yP0ZBnJvHCCZAvqcEMnld0BD7ljZBZAbISIrTjaIVCrVggrrNXD87waU7hOmW5QmcRAZAvEpv64SaJojGu60doyzScWrmm1V0RIoxZCQBsUJiQsLl149hy8LZADDhzEZBmWycfOajX2pjmRFwsuEssVNUsK1VJZAghLpX014c3uFaGAZDZD"
+    phone-number-id: "657655554103467"
+    url: "https://graph.facebook.com/v22.0"
